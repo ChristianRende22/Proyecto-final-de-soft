@@ -31,7 +31,7 @@ class JuegoAdivinanza(tk.Tk):
         self.jugar_nuevo()
 
     def jugar_nuevo(self):
-        if self.num_rondas == 10:
+        if self.num_rondas == 5:
             self.mostrar_resultados()
             return
 
@@ -94,7 +94,7 @@ class JuegoAdivinanza(tk.Tk):
             self.label_pista.config(text=f"Pista: {self.pistas[self.pistas_mostradas]}")
             self.pistas_mostradas += 1
         else:
-            self.label_pista.config(text="No hay más pistas disponibles")
+            self.label_pista.config(text="Valiste verga")
 
     def mostrar_resultados(self):
         for widget in self.winfo_children():
