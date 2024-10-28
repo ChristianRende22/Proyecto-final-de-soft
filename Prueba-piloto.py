@@ -29,7 +29,7 @@ ANIMALES = [
     ('Murcielago', 'Mamífero volador.'),
     ('Morsa','Con colmillos prominentes y vive en aguas frías.'),
     ('Flamenco', 'Rosa por su dieta de crustáceos.'),
-    ('Halcón','Velocidad y habilidad de caza en vuelo.'),
+    ('Halcon','Velocidad y habilidad de caza en vuelo.'),
     ('Rinoceronte','Gran tamaño y piel gruesa.')
 ]
 
@@ -39,18 +39,21 @@ class AdivinaElAnimal:
     def __init__(self, root):
         self.root = root
         self.root.title("Juego de Adivinanza de Animales")
-        self.root.geometry("800x600")
+        self.root.geometry("500x500")
         self.usuario = ""
         self.nivel_actual = 0
         self.puntaje_total = 0
         self.palabras_usadas = []
-        self.vidas = 10
+        self.vidas = 5 
         self.palabra_actual = ""
         self.pista_actual = ""
         self.palabra_oculta = []
         self.intentos_fallidos = 0
         self.puntajes_usuarios = {}
-
+##############################################################################################################################
+# Aqui se crea la clase, las funcion inicial del juego, y se crea las variables usadas dentro del juego dentro de la clase ###
+##############################################################################################################################
+##############################################################################################################################
 # crear funcion para crear interfaz inicio
         self.crear_interfaz_inicio()
 # crear interfaz inicio
@@ -60,26 +63,49 @@ class AdivinaElAnimal:
             widget.destroy()
 
 # crear etiqueta para ingresar nombre de usuario
-        self.frame_inicio = tk.Frame(self.root)
+        self.frame_inicio = tk.Frame(self.root,
+                                     bg="grey" ,
+                                     padx=20, 
+                                     pady=50)
         self.frame_inicio.pack()
 
-        tk.Label(self.frame_inicio, text="Ingrese su nombre:").pack(pady=10)
-        self.entry_usuario = tk.Entry(self.frame_inicio)
+        tk.Label(self.frame_inicio, 
+                 text="Ingrese su nombre:", 
+                 border=4, 
+                 width=30).pack(pady=10)
+        self.entry_usuario = tk.Entry(self.frame_inicio, 
+                                      background="gray64",
+                                      border=4 ,
+                                      foreground="black", 
+                                      width=30, 
+                                      font=("Times New Roman", 12))
+        
         self.entry_usuario.pack(pady=10)
 # crear boton para comenzar nuevo juego
-        btn_nuevo_juego = tk.Button(self.frame_inicio, text="Comenzar Nuevo Juego", command=self.nuevo_juego, bg="green")
+        btn_nuevo_juego = tk.Button(self.frame_inicio, 
+                                    text=" Nuevo Juego", 
+                                    command=self.nuevo_juego, 
+                                    border=4, width=30 ) 
         btn_nuevo_juego.pack(pady=10)
 # crear boton para mostrar instrucciones
-        btn_instrucciones = tk.Button(self.frame_inicio, text="Instrucciones", command=self.mostrar_instrucciones)
+        btn_instrucciones = tk.Button(self.frame_inicio, 
+                                      text="Instrucciones", 
+                                      command=self.mostrar_instrucciones, 
+                                      border=4, 
+                                      width=30)
         btn_instrucciones.pack(pady=10)
 
 # crear boton para ver puntuacion
-        btn_puntuacion = tk.Button(self.frame_inicio, text="Ver Puntuación", command=self.mostrar_puntuacion)
+        btn_puntuacion = tk.Button(self.frame_inicio, 
+                                   text="Ver Puntuación", 
+                                   command=self.mostrar_puntuacion, 
+                                   border=4,
+                                   width=30)
         btn_puntuacion.pack(pady=10)
 # crear funcion para mostrar instrucciones
     def mostrar_instrucciones(self):
 
-        messagebox.showinfo("Instrucciones", "Adivina el animal letra por letra. Tienes 10 vidas por palabra.")
+        messagebox.showinfo("Instrucciones", "Adivina el animal letra por letra. Tienes 5 vidas por palabra.")
 # crear funcion para mostrar puntuacion
     def mostrar_puntuacion(self):
 
@@ -92,7 +118,7 @@ class AdivinaElAnimal:
                     puntuacion_texto += f"Nivel {i}: {puntaje} puntos\n"
                 puntuacion_texto += f"Puntuación total: {puntajes['total']} puntos\n"
         else:
-            puntuacion_texto += "No hay puntuaciones registradas aún."
+            puntuacion_texto += (f"perdon{self.usuario} no hay puntuaciones registradas aún.")
 
         messagebox.showinfo("Puntuación", puntuacion_texto)
 # crear funcion para comenzar nuevo juego
@@ -103,7 +129,7 @@ class AdivinaElAnimal:
             self.nivel_actual = 1
             self.puntaje_total = 0
             self.palabras_usadas = []
-            self.vidas = 10
+            self.vidas = 5
             self.intentos_fallidos = 0
             self.frame_inicio.pack_forget()
             self.jugar_nivel()
@@ -116,12 +142,12 @@ class AdivinaElAnimal:
 # crear funcion para jugar nivel
     def jugar_nivel(self):
 
-        if self.nivel_actual <= 10:
+        if self.nivel_actual <= 5:
             self.palabra_actual, self.pista_actual = random.choice(
                 [p for p in ANIMALES if p[0] not in self.palabras_usadas])
             self.palabras_usadas.append(self.palabra_actual)
             self.palabra_oculta = ["_" for _ in self.palabra_actual]
-            self.vidas = 10
+            self.vidas = 5
             self.crear_interfaz_juego()
         else:
             messagebox.showinfo("Juego Terminado", f"¡Felicidades {self.usuario}! Has completado el juego.")
@@ -129,12 +155,17 @@ class AdivinaElAnimal:
 # crear funcion para crear interfaz juego
     def crear_interfaz_juego(self):
 
-        self.frame_juego = tk.Frame(self.root)
+        self.frame_juego = tk.Frame(self.root, bg="gray", )
         self.frame_juego.pack()
 # crear etiqueta para mostrar nivel y pista
-        tk.Label(self.frame_juego, text=f"Nivel {self.nivel_actual}").pack(pady=10)
-        tk.Label(self.frame_juego, text=f"Pista: {self.pista_actual}").pack(pady=10)
-        self.lbl_palabra_oculta = tk.Label(self.frame_juego, text=' '.join(self.palabra_oculta))
+        tk.Label(self.frame_juego, text=f"Nivel {self.nivel_actual}", border=3,background="grey64",width=20).pack(pady=10)
+        tk.Label(self.frame_juego, text=f"Pista: {self.pista_actual}",border=5, width=50).pack(pady=10)
+        self.lbl_palabra_oculta = tk.Label(self.frame_juego, text=' '.join(self.palabra_oculta) ,
+                                           background="gray64",
+                                           border=4 ,
+                                           foreground="black", 
+                                           width=30, 
+                                           font=("Times New Roman", 12))
         self.lbl_palabra_oculta.pack(pady=10)
 
 # crear etiqueta para mostrar vidas restantes
@@ -144,7 +175,9 @@ class AdivinaElAnimal:
         self.entry_letra = tk.Entry(self.frame_juego)
         self.entry_letra.pack(pady=10)
 # crear etiqueta para ingresar letra
-        btn_adivinar = tk.Button(self.frame_juego, text="Adivinar Letra", command=self.adivinar_letra)
+        btn_adivinar = tk.Button(self.frame_juego, text="Adivinar Letra", command=self.adivinar_letra,
+                                 border=4,
+                                 width=30)
         btn_adivinar.pack(pady=10)
 # crear funcion para adivinar letra
     def adivinar_letra(self):
@@ -169,7 +202,7 @@ class AdivinaElAnimal:
         self.lbl_vidas.config(text=f"Vidas restantes: {self.vidas}")
 # verificar si la letra es correcta
         if "_" not in self.palabra_oculta:
-            messagebox.showinfo("Correcto", "¡Has adivinado la palabra!")
+            messagebox.showinfo(f"Correcto {self.usuario}", "¡Has adivinado la palabra!")
             puntaje_nivel = (10 - self.intentos_fallidos) * 10
             self.puntajes_usuarios[self.usuario]["niveles"].append(puntaje_nivel)
             self.puntajes_usuarios[self.usuario]["total"] += puntaje_nivel
@@ -177,7 +210,7 @@ class AdivinaElAnimal:
             self.frame_juego.pack_forget()
             self.jugar_nivel()
         elif self.vidas == 0:
-            messagebox.showinfo("Perdiste", "¡Te has quedado sin vidas!")
+            messagebox.showinfo(f"Perdiste {self.usuario}", "¡Te has quedado sin vidas!")
             self.puntajes_usuarios[self.usuario]["niveles"].append(0)
             self.frame_juego.pack_forget()
             self.regresar_inicio()
