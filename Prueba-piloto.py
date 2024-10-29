@@ -40,7 +40,7 @@ class AdivinaElAnimal:
     def __init__(self, root):
         self.root = root
         self.root.title("Juego de Adivinanza de Animales")
-        self.root.geometry("555x555")
+        self.root.geometry("500x500")
         self.usuario = ""
         self.nivel_actual = 0
         self.puntaje_total = 0
