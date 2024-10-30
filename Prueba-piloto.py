@@ -5,7 +5,7 @@ from tkinter import messagebox
 
 
 
-# Diccionare de animales en tuplas
+# Diccionario de animales en tuplas
 ANIMALES = [
     ('Leon', 'Depredador de la sabana.'),
     ('Caballo', 'Animal Equino.'),
@@ -31,6 +31,7 @@ ANIMALES = [
     ('Flamenco', 'Rosa por su dieta de crustáceos.'),
     ('Halcon','Velocidad y habilidad de caza en vuelo.'),
     ('Rinoceronte','Gran tamaño y piel gruesa.')
+    
 ]
 
 
@@ -65,7 +66,7 @@ class AdivinaElAnimal:
 
 # crear etiqueta para ingresar nombre de usuario
         self.frame_inicio = tk.Frame(self.root,
-                                     bg="Skyblue2" ,
+                                     bg="SteelBlue4" ,
                                      width=500, 
                                      height=500,
                                      padx=150, 
@@ -74,10 +75,12 @@ class AdivinaElAnimal:
 
         tk.Label(self.frame_inicio, 
                  text="Ingrese su nombre:", 
-                 border=4, 
+                 bg="cyan4",
+                 border=4,
+                 font=("Times New Roman", 12),
                  width=30).pack(pady=10)
         self.entry_usuario = tk.Entry(self.frame_inicio, 
-                                      background="gray64",
+                                      background="LightSteelBlue1",
                                       border=4 ,
                                       foreground="black", 
                                       width=30, 
@@ -106,6 +109,9 @@ class AdivinaElAnimal:
                                    border=4,
                                    width=30)
         btn_puntuacion.pack(pady=10)
+        
+
+
 # crear funcion para mostrar instrucciones
     def mostrar_instrucciones(self):
 
@@ -267,5 +273,9 @@ if __name__ == "__main__":
     root = tk.Tk()
     app = AdivinaElAnimal(root) 
     root.mainloop()
+
+
+
+
 
 
