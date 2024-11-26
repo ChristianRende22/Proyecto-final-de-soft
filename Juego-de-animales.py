@@ -7,31 +7,30 @@ from PIL import Image, ImageTk
 
 # Diccionario de animales en tuplas
 ANIMALES = [
-    ('Leon', 'Depredador de la sabana.'),
-    ('Caballo', 'Animal Equino.'),
-    ('Tiburon', 'Depredador marino.'),
-    ('Cebra', 'Animal rayado.'),
-    ('Ajolote', 'Animal acuático endemico de Mexico.'),
-    ('Camello', 'Animal jorobado.'),
-    ('Gato', 'Mascota independiente.'),
-    ('Serpiente', 'Reptil sin patas.'),
-    ('Cocodrilo', 'Reptil que vive en ríos.'),
-    ('Perro', 'El mejor amigo del hombre.'),
-    ('Pinguino', 'Animal con traje.'),
-    ('Ballena', 'Mamífero marino que canta.'),
-    ('Elefante', 'Mamífero que jamás olvida.'),
-    ('Lobo', 'Canino que caza en manada.'),
-    ('Tortuga', 'Reptil acorazado.'),
-    ('Tigre', 'Felino de gran tamaño.'),
-    ('Capibara', 'Amigo de todos.'),
-    ('Canguro', 'Animal boxeador.'),
-    ('Aguila', 'Ave rapaz con vista aguda y gran cazadora.'),
-    ('Murcielago', 'Mamífero volador.'),
-    ('Morsa','Con colmillos prominentes y vive en aguas frías.'),
-    ('Flamenco', 'Rosa por su dieta de crustáceos.'),
-    ('Halcon','Velocidad y habilidad de caza en vuelo.'),
-    ('Rinoceronte','Gran tamaño y piel gruesa.')
-    
+    ('Leon', '¡Soy el rey de la selva y rujo muy fuerte!'),
+    ('Caballo', 'Tengo cuatro patas, una cola larga y me encanta galopar.'),
+    ('Tiburon', 'Nado en el mar y tengo muchos dientes afilados.'),
+    ('Cebra', 'Soy blanquita y negrita, ¡parezco un pijama andante!'),
+    ('Ajolote', 'Soy un animalito mexicano que vive en el agua y parezco sonreír.'),
+    ('Camello', 'Tengo jorobas en mi espalda y puedo vivir en el desierto.'),
+    ('Gato', 'Digo miau, me encanta dormir y jugar con estambre.'),
+    ('Serpiente', 'Me arrastro por el suelo y hago ssssssss.'),
+    ('Cocodrilo', 'Vivo en el río, tengo una boca muy grande y escamas verdes.'),
+    ('Perro', 'Digo guau guau y me encanta jugar con mi dueño.'),
+    ('Pinguino', 'Parezco usar un smoking y me encanta nadar y deslizarme en el hielo.'),
+    ('Ballena', 'Soy el animal más grande del mar y canto bonitas canciones.'),
+    ('Elefante', 'Tengo una trompa larga y orejas grandes como abanicos.'),
+    ('Lobo', 'Aúllo a la luna y vivo con mi familia en el bosque.'),
+    ('Tortuga', 'Camino despacito y llevo mi casa en la espalda.'),
+    ('Tigre', 'Soy como un gatito gigante con rayas naranjas y negras.'),
+    ('Capibara', 'Soy el roedor más grande y amigable del mundo.'),
+    ('Canguro', 'Salto muy alto y llevo a mis bebés en mi bolsita.'),
+    ('Aguila', '¡Puedo volar muy alto y ver todo desde el cielo!'),
+    ('Murcielago', 'Duermo de cabeza y salgo de noche a volar.'),
+    ('Morsa', 'Tengo bigotes largos y dientes grandes como colmillos.'),
+    ('Flamenco', 'Soy un ave rosada y me paro en una pata.'),
+    ('Halcon', 'Vuelo rapidísimo y soy un experto cazador del cielo.'),
+    ('Rinoceronte', 'Soy grandote y tengo un cuerno en mi nariz.')
 ]
 
 
@@ -211,7 +210,6 @@ class AdivinaElAnimal:
     def nuevo_juego(self):
         self.usuario = self.entry_usuario.get()
         if self.usuario:
-            #self.crear_interfaz_instrucciones()
             self.nivel_actual = 1
             self.puntaje_total = 0
             self.palabras_usadas = []
@@ -220,7 +218,6 @@ class AdivinaElAnimal:
             self.frame_inicio.pack_forget()
             self.jugar_nivel()
 
-# verificar si el usuario ingresado ya existe en la lista de usuarios
             if self.usuario not in self.puntajes_usuarios:
                 self.puntajes_usuarios[self.usuario] = {"niveles": [], "total": 0}
         else:
@@ -228,7 +225,7 @@ class AdivinaElAnimal:
 # crear funcion para jugar nivel
     def jugar_nivel(self):
 
-        if self.nivel_actual <= 5:
+        if self.nivel_actual <= 10:
             self.palabra_actual, self.pista_actual = random.choice(
                 [p for p in ANIMALES if p[0] not in self.palabras_usadas])
             self.palabras_usadas.append(self.palabra_actual)
@@ -243,27 +240,30 @@ class AdivinaElAnimal:
 
         self.frame_juego = tk.Frame(self.root,
                                     bg="LightSkyblue1" ,
-                                    width=500, 
+                                    width=2000, 
                                     height=500,
                                     padx=60, 
                                     pady=60)
         self.frame_juego.place(relx=0.5, rely=0.6, anchor="center")
 # crear etiqueta para mostrar nivel y pista
-        tk.Label(self.frame_juego, text=f"Nivel {self.nivel_actual}",
+        tk.Label(self.frame_juego, 
+                text=f"Nivel {self.nivel_actual}",
                 background="lightskyblue1",
                 border=4,
                 foreground="deepskyblue4", 
                 width=50, 
                 font=("verdana", 18, 'bold', 'underline'),
                  ).pack(pady=10)
-        tk.Label(self.frame_juego, text=f"Pista: {self.pista_actual}",
+        tk.Label(self.frame_juego, 
+                text=f"Pista: {self.pista_actual}",
                 background='lightskyblue1',
                 border=4,
                 foreground="deepskyblue4", 
-                width=50, 
+                width=100, 
                 font=("verdana", 13)
                  ).pack(pady=10)
-        self.lbl_palabra_oculta = tk.Label(self.frame_juego, text=' '.join(self.palabra_oculta) ,
+        self.lbl_palabra_oculta = tk.Label(self.frame_juego, 
+                                           text=' '.join(self.palabra_oculta) ,
                                            background="lightskyblue1",
                                            border=4 ,
                                            foreground="deepskyblue4", 
@@ -291,6 +291,7 @@ class AdivinaElAnimal:
         self.entry_letra.pack(pady=10, 
                               padx=30, 
                               )
+        self.entry_letra.bind("<Return>",lambda event: self.adivinar_letra())
 # crear etiqueta para ingresar letra
         btn_adivinar = tk.Button(self.frame_juego, text="Adivinar Letra", command=self.adivinar_letra,
                                  border=4,
@@ -321,7 +322,7 @@ class AdivinaElAnimal:
 
 
         self.lbl_vidas.config(text=f"Vidas restantes: {self.vidas * '♡ '}", font=('verdana', 12))
-# verificar si la letra es correcta
+# verificar si la palabra es correcta
         if "_" not in self.palabra_oculta:
             messagebox.showinfo(f"Correcto {self.usuario}", "¡Has adivinado la palabra!")
             puntaje_nivel = (10 - self.intentos_fallidos) * 10
@@ -335,7 +336,7 @@ class AdivinaElAnimal:
             self.puntajes_usuarios[self.usuario]["niveles"].append(0)
             self.frame_juego.pack_forget()
             self.regresar_inicio()
-# actualizar palabra oculta
+# actualizar letra oculta
     def actualizar_palabra_oculta(self, letra):
         for idx, char in enumerate(self.palabra_actual.upper()):
             if char == letra:
