@@ -119,7 +119,8 @@ El juego incluye una variedad de animales con sus respectivas pistas, incluyendo
 
 ## Autor
 
-[Christian Renderos]
+[Christian Renderos
+]
 
 
 
